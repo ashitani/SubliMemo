@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "SubliMemo: Create Memo",
+        "command": "create_subli_memo"
+    }
+]
