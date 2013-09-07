@@ -1,8 +1,8 @@
-# SubliMemo for Sublime Text 3
+# SubliMemo for Sublime Text 2/3
 
 ## What's this
 
-Sublime Text plugin to assist takin some notes.
+Sublime Text plugin to assist taking some notes.
 
 ## Installation
 
@@ -22,7 +22,7 @@ At this time, only you must set is "path".
 ### Create Memo
 
 1. `Alt+M`(Win/Linux) or `Super+M`(OSX) and input Memo name.
-2. Text file named `path/20130907MemoName.txt`(For Example) is created.
+2. Text file named `path/20130907MemoName.txt`(for example) is created.
 
 ### Goto Memo
 
