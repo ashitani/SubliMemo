@@ -14,8 +14,12 @@ class CreateSubliMemoCommand(sublime_plugin.TextCommand):
 
 		self.settings = sublime.load_settings("SubliMemo.sublime-settings")
 		self.path = self.settings.get("path")
-		if self.path == None:
+
+		if ((self.path == None) or (self.path=="")):
 			self.path = ""
+			sublime.error_message("Prease set path\n(Preferences-Package Settings-SubliMemo)")
+			return
+		self.path+=""
 
 		self.view.window().show_input_panel("Memo Name:", 
 			"", self.on_done, None,None)
