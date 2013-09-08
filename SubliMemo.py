@@ -11,20 +11,21 @@ class SubliMemoBase:
 		self.path = self.settings.get("path")
 
 		if ((self.path == None) or (self.path=="")):
-			pass_error()
+			print("can't load settings")
+			self.path_error()
 			return
-		self.path+="/"
 		self.path=os.path.normpath(self.path)
 		try:
 			self.file_list = os.listdir(self.path)
 			self.file_list = fnmatch.filter(self.file_list,'*.txt')
 		except FileNotFoundError:
-			path_error()
+			print("txt not found")
+			self.path_error()
 			return
 		self.file_list.sort()
 		self.file_list.reverse()
 
-	def path_error():
+	def path_error(self):
 		sublime.error_message("Prease set path preferly.\n(Preferences-Package Settings-SubliMemo)")
 
 
@@ -36,7 +37,7 @@ class CreateSubliMemoCommand(sublime_plugin.TextCommand, SubliMemoBase):
 
 	def on_done(self,word):
 		date = datetime.datetime.today().strftime("%Y%m%d_")		
-		filename = self.path + date + word + ".txt"
+		filename = self.path + "/" + date + word + ".txt"
 		v = self.view.window().open_file(filename)
 
 	def run(self,edit):
@@ -62,7 +63,6 @@ class FindSubliMemoCommand(sublime_plugin.WindowCommand, SubliMemoBase):
 class SubliMemoListner(sublime_plugin.EventListener, SubliMemoBase):
 
 	def __init__(self):
-		SubliMemoBase.__init__(self)
 		sublime_plugin.EventListener.__init__(self)
 
 	def post_text_command(self,view, command_name, args):
@@ -70,6 +70,7 @@ class SubliMemoListner(sublime_plugin.EventListener, SubliMemoBase):
 
 	def on_pre_close(self,view):
 		if (view.name()=="Find Results"):
+			SubliMemoBase.__init__(self)
 			try:
 				project = view.window().project_data()
 				f=project['folders']
@@ -81,8 +82,7 @@ class SubliMemoListner(sublime_plugin.EventListener, SubliMemoBase):
 					pass
 				else:
 					f_new.append(item)
-			print(f_new)
-
+			
 			if(f_new==[]):
 				view.window().set_project_data({})
 			else:
