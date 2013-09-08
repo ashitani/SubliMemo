@@ -21,12 +21,12 @@ At this time, only you must set is "path".
 
 ### Create Memo
 
-1. `Alt+M`(Win/Linux) or `&#x2318;+M`(OSX) and input Memo name.
+1. `Alt+M`(Win/Linux) or `⌘+M`(OSX) and input Memo name.
 2. Text file named `path/20130907MemoName.txt`(for example) is created.
 
 ### Goto Memo
 
-1. `Alt+P`(Win/Linux) or `&#x2318;+P`(OSX) 
+1. `Alt+P`(Win/Linux) or `⌘+P`(OSX) 
 
 ## License
 
