@@ -14,6 +14,7 @@ class SubliMemoBase:
 			pass_error()
 			return
 		self.path+="/"
+		self.path=os.path.normpath(self.path)
 		try:
 			self.file_list = os.listdir(self.path)
 			self.file_list = fnmatch.filter(self.file_list,'*.txt')
@@ -50,12 +51,41 @@ class FindSubliMemoCommand(sublime_plugin.WindowCommand, SubliMemoBase):
 
 	def run(self):
 		project = self.window.project_data()
-		print(project)
 		if ((project == {} ) or (project==None)):
 			project= {'folders': [{'path': self.path}]}
-			self.window.set_project_data(project)
 		else:
 			project['folders'].append({'path': self.path})
+		self.window.set_project_data(project)
 
-		self.window.run_command("show_panel", {"panel": "find_in_files"} )
+		self.window.run_command("show_panel", {"panel": "find_in_files","args": {} } )
+
+class SubliMemoListner(sublime_plugin.EventListener, SubliMemoBase):
+
+	def __init__(self):
+		SubliMemoBase.__init__(self)
+		sublime_plugin.EventListener.__init__(self)
+
+	def post_text_command(self,view, command_name, args):
+		sublime.error_message(command_name)
+
+	def on_pre_close(self,view):
+		if (view.name()=="Find Results"):
+			try:
+				project = view.window().project_data()
+				f=project['folders']
+			except:
+				return
+			f_new=[]
+			for item in f:
+				if(item['path']==self.path):
+					pass
+				else:
+					f_new.append(item)
+			print(f_new)
+
+			if(f_new==[]):
+				view.window().set_project_data({})
+			else:
+				project['folders']=f_new
+				view.window().set_project_data(project)
 
