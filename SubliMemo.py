@@ -19,7 +19,7 @@ class SubliMemoBase:
 			self.file_list = os.listdir(self.path)
 			self.file_list = fnmatch.filter(self.file_list,'*.txt')
 		except FileNotFoundError:
-			pass_error()
+			path_error()
 			return
 		self.file_list.sort()
 		self.file_list.reverse()
