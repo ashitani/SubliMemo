@@ -12,8 +12,8 @@ Sublime Text plugin to assist taking some notes.
 
 ## Settings
 
-1. Copy from `Preferences-Package Settings-SubliMemo-Setting-Default`
-2. Paste to `Preferences-Package Settings-SubliMemo-Setting-User` and edit.
+1. Copy from `Preferences-Package Settings`-`SubliMemo`-`Settings-Default`
+2. Paste to `Preferences-Package Settings`-`SubliMemo`-`Settings-User` and edit.
 
 At this time, only you must set is "path".
 
@@ -21,12 +21,12 @@ At this time, only you must set is "path".
 
 ### Create Memo
 
-1. `Alt+M`(Win/Linux) or `Super+M`(OSX) and input Memo name.
+1. `Alt+M`(Win/Linux) or `&#x2318;+M`(OSX) and input Memo name.
 2. Text file named `path/20130907MemoName.txt`(for example) is created.
 
 ### Goto Memo
 
-1. `Alt+P`(Win/Linux) or `Super+P`(OSX) 
+1. `Alt+P`(Win/Linux) or `&#x2318;+P`(OSX) 
 
 ## License
 
