@@ -4,7 +4,7 @@
         "command": "create_subli_memo"
     },
     {
-        "caption": "SubliMemo: GoTo Memo",
-        "command": "goto_subli_memo"
+        "caption": "SubliMemo: Find Memo",
+        "command": "find_subli_memo"
     }
 ]

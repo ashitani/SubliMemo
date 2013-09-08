@@ -24,7 +24,7 @@ At this time, only you must set is "path".
 1. `Alt+M`(Win/Linux) or `⌘+M`(OSX) and input Memo name.
 2. Text file named `path/20130907MemoName.txt`(for example) is created.
 
-### Goto Memo
+### Find Memo
 
 1. `Alt+P`(Win/Linux) or `⌘+P`(OSX) 
 

@@ -1,5 +1,9 @@
 [
 	{
 	 "keys": ["alt+m"], "command": "create_subli_memo"
+	},
+	{
+	 "keys": ["alt+p"], "command": "find_subli_memo"
 	}
+
 ]

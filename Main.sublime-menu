@@ -1,11 +1,11 @@
 [
     {
-        "id": "goto",
+        "id": "find",
         "children":
         [
             {
                 "caption": "SubliMemo",
-                "command": "goto_subli_memo"
+                "command": "find_subli_memo"
             },
             {
                 "caption":"-"
@@ -28,8 +28,8 @@
                         "command": "create_subli_memo"
                     },
                     { 
-                        "caption": "GoTo", 
-                        "command": "goto_subli_memo"
+                        "caption": "Find", 
+                        "command": "find_subli_memo"
                     }
                 ]
             }

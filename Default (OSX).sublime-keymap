@@ -3,6 +3,6 @@
 	 "keys": ["super+m"], "command": "create_subli_memo"
 	},
 	{
-	 "keys": ["super+p"], "command": "goto_subli_memo"
+	 "keys": ["super+p"], "command": "find_subli_memo"
 	}
 ]
