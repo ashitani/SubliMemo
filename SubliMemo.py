@@ -3,12 +3,14 @@ import sublime, sublime_plugin
 import os
 import fnmatch
 import datetime
+import time
 
 class SubliMemoBase:
 	def __init__(self):
 		self.settings=sublime.load_settings("SubliMemo.sublime-settings")
 		settings = self.settings
 		self.path = self.settings.get("path")
+		self.extension = self.settings.get("extension")
 
 		if ((self.path == None) or (self.path=="")):
 			print("can't load settings")
@@ -17,9 +19,9 @@ class SubliMemoBase:
 		self.path=os.path.normpath(self.path)
 		try:
 			self.file_list = os.listdir(self.path)
-			self.file_list = fnmatch.filter(self.file_list,'*.txt')
+			self.file_list = fnmatch.filter(self.file_list,'*.'+self.extension)
 		except FileNotFoundError:
-			print("txt not found")
+			print("*."+self.extension+" not found")
 			self.path_error()
 			return
 		self.file_list.sort()
@@ -37,12 +39,27 @@ class CreateSubliMemoCommand(sublime_plugin.TextCommand, SubliMemoBase):
 
 	def on_done(self,word):
 		date = datetime.datetime.today().strftime("%Y%m%d_")		
-		filename = self.path + "/" + date + word + ".txt"
+	
+		filename = self.path + "/" + date + word + "." + self.extension
 		v = self.view.window().open_file(filename)
 
+		def set_text():
+			if v.is_loading():
+				sublime.set_timeout_async(set_text, 0.1)
+			else:
+				v.run_command("insert_my_text",{"args":{'text':"# "+date+word+"\n\n"}})
+		set_text()
+
 	def run(self,edit):
+		self.edit=edit
 		self.view.window().show_input_panel("Memo Name:", 
 			"", self.on_done, None,None)
+
+
+class InsertMyText(sublime_plugin.TextCommand):
+  def run(self, edit, args):
+  	v=self.view
+  	v.insert(edit, 0, args['text'])
 
 class FindSubliMemoCommand(sublime_plugin.WindowCommand, SubliMemoBase):
 
@@ -56,8 +73,8 @@ class FindSubliMemoCommand(sublime_plugin.WindowCommand, SubliMemoBase):
 			project= {'folders': [{'path': self.path}]}
 		else:
 			project['folders'].append({'path': self.path})
-		self.window.set_project_data(project)
 
+		self.window.set_project_data(project)
 		self.window.run_command("show_panel", {"panel": "find_in_files","args": {} } )
 
 class SubliMemoListner(sublime_plugin.EventListener, SubliMemoBase):
