@@ -15,7 +15,8 @@ Sublime Text plugin to assist taking some notes.
 1. Copy from `Preferences-Package Settings`-`SubliMemo`-`Settings-Default`
 2. Paste to `Preferences-Package Settings`-`SubliMemo`-`Settings-User` and edit.
 
-At this time, only you must set is "path".
+- "path" is the path to which memos are placed
+- "extension" is the memo file extension
 
 ## Usage
 

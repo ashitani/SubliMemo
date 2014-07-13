@@ -38,16 +38,17 @@ class CreateSubliMemoCommand(sublime_plugin.TextCommand, SubliMemoBase):
 		sublime_plugin.TextCommand.__init__(self,args)
 
 	def on_done(self,word):
-		date = datetime.datetime.today().strftime("%Y%m%d_")		
+		date = datetime.datetime.today().strftime("%Y%m%d")		
+		datet = datetime.datetime.today().strftime("%Y/%m/%d")		
 	
-		filename = self.path + "/" + date + word + "." + self.extension
+		filename = self.path + "/" + date + "_" + word + "." + self.extension
 		v = self.view.window().open_file(filename)
 
 		def set_text():
 			if v.is_loading():
 				sublime.set_timeout_async(set_text, 0.1)
 			else:
-				v.run_command("insert_my_text",{"args":{'text':"# "+date+word+"\n\n"}})
+				v.run_command("insert_my_text",{"args":{'text':"# "+datet+" "+word+"\n\n"}})
 		set_text()
 
 	def run(self,edit):
